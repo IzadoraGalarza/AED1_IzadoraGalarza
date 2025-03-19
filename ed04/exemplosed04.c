@@ -9,8 +9,7 @@ Author: Izadora Galarza Alves
 #include<math.h>
 #include"io.h"
 #include<string.h>
-#include<stdbool.h>
-#define STR_SIZE 80
+
 
 
 void method_00 ()
@@ -33,7 +32,7 @@ void method_01 (void)
 	while( controle <=quantidade)
 	{
 	valor = IO_readint (IO_concat( IO_concat        ("",IO_toString_d(controle)),":"));
-	printf("\n%s%d","Valor =", valor);
+	printf("\n%s%d\n","Valor =", valor);
 	controle++;
 	}
 	IO_pause("Apertar ENTER para continuar.");
@@ -42,7 +41,7 @@ void method_01 (void)
 
 bool positivo (int x)
 {
-	bool result = true;
+	bool result = false;
 	if( x>0)
 	{
 		result = true;
@@ -157,7 +156,21 @@ void method_04 ()
 	int controle=0;
 
 	IO_id("Exemplo0404 - ED04 - Izadora Galarza Alves");
-	
+	quantidade = IO_readint ( "Entrar com uma quantidade: " );
+    controle = 1;
+    while ( controle <= quantidade )
+    {
+        valor = IO_readint ( IO_concat (
+        IO_concat ( "", IO_toString_d ( controle ) ),
+        ": " ) );
+         if ( belongsTo ( valor, 0, 100 ) && even ( valor ) )
+        {
+            contador = contador + 1;
+        } 
+        controle++;
+    }
+    IO_printf ( "%s%d\n", "Positivos menores que 100 e pares = ", contador );
+    IO_pause ( "Apertar ENTER para continuar" );
 }
 
 /**
@@ -217,7 +230,7 @@ Method_06 - Ler palavra e contar letras minusculas.
 */
 void method_06 ( )
 {
-    char *palavra = IO_new_chars (STR_SIZE); //estava dando erro, entao eu tentei usar um ponteiro
+    chars palavra = IO_new_chars (STR_SIZE); //estava dando erro, entao eu tentei usar um ponteiro
     int tamanho = 0;
     int posicao = 0;
     char simbolo = '_';
@@ -246,7 +259,7 @@ Method_07 - Ler palavra, contar e mostrar letras minusculas.
 */
 void method_07 ( )
 {
-    char* palavra = IO_new_chars ( STR_SIZE );
+    chars palavra = IO_new_chars (STR_SIZE);
     int tamanho = 0;
     int posicao = 0;
     char simbolo = '_';
@@ -273,12 +286,12 @@ Method_08 - Ler palavra, contar e mostrar letras minusculas (alternativo).
 */
 void method_08 ( )
 {
-    char* palavra = IO_new_chars (STR_SIZE);
+    chars palavra = IO_new_chars (STR_SIZE);
     int tamanho=0;
     int posicao=0;
     char simbolo='_';
     int contador=0;
-    char* minusculas = IO_new_chars(STR_EMPTY);
+    chars minusculas = IO_new_chars(STR_SIZE);
 
     strcpy ( minusculas, STR_EMPTY ); 
 
@@ -321,7 +334,7 @@ Method_09 - Ler palavra e contar os algarismos.
 */
 void method_09 ( )
 {
-    char* palavra = IO_new_chars ("STR_SIZE");
+    chars palavra = IO_new_chars (STR_SIZE);
     int tamanho =0;
     int posicao =0;
     char simbolo ='_';
@@ -338,8 +351,9 @@ void method_09 ( )
         if (isDigital(simbolo))
         {
             IO_printf("%c",simbolo);
+            contador++;
         }
-        contador++;
+       
     }
     IO_printf ( "\n%s%d\n", "Algarismos = ", contador );
     IO_pause ( "Apertar ENTER para continuar" );
