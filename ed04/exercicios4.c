@@ -20,7 +20,7 @@ void method_00 ()
 - ler dois valores reais para definir um intervalo fechado; ok
 - ler tantos valores reais quanto a quantidade, um de cada vez e
 - contar quantos desses valores estão dentro do intervalo, e quantos estão fora dele. */ 
-bool intervalo (double x, double superior, double inferior)
+bool intervalo (double x, double inferior, double superior)
 {
     bool result= false;
     if (x>=inferior && x<=superior)
@@ -40,9 +40,9 @@ void exe0411 ()
     int controle=0;
 
     IO_id("Exercicio0411 - ED04 - Izadora Galarza Alves");
-    quantidade= IO_readint("Entre com uma quantidade");
-    inf= IO_readdouble("Entre com um valor para o intervalo inferior:");
-    sup= IO_readdouble("Entre com um valor para o intervalo superior");
+    quantidade= IO_readint("Entre com uma quantidade: ");
+    inf= IO_readdouble("Entre com um valor para o intervalo inferior: ");
+    sup= IO_readdouble("Entre com um valor para o intervalo superior: ");
 
 
     controle=1;
@@ -61,8 +61,8 @@ void exe0411 ()
         }
         controle++;
     }
-    IO_printf("%s : %d\n","Valores dentro do intervalo", contadorD);
-    IO_printf("%s : %d","Valores fora do intervalo", contadorF);
+    IO_printf("%s : %d\n","Valores dentro do intervalo: ", contadorD);
+    IO_printf("%s : %d","Valores fora do intervalo: ", contadorF);
     IO_pause("Apertar ENTER para continuar.");
 
 }
@@ -72,9 +72,40 @@ void exe0411 ()
 - ler uma sequência de caracteres do teclado;
 - contar e mostrar a quantidade de letras minúsculas maiores que 'c' e menores que 'p'.
 DICA: Definir uma função para determinar se um caractere é letra maiúscula. **/
+
+bool minuscula2 (char x)
+{
+    bool result =false;
+    if ('A' <=x && x<= 'Z')
+    {
+        result= true;
+    }
+    return (result);
+}
+
 void exe0412 ()
 {
-    
+    chars palavra = IO_new_chars(STR_SIZE);
+    int tamanho=0;
+    int posicao=0;
+    char simbolo= '_';
+    int contador =0;
+
+    IO_id("Exercicio0412 -ED04 - Izadora Galarza Alves");
+    palavra = IO_readstring("Entre com uma palavra:");
+    tamanho= strlen(palavra);
+    for(posicao=0;posicao < tamanho; posicao= posicao+1)
+    {
+        simbolo= palavra [posicao]; //isolar simbolo
+        if (!(minuscula2(simbolo)) && simbolo >'c' && simbolo < 'p' )
+        {
+            IO_printf("%c\n",simbolo);
+            contador= contador +1;
+        }
+    }
+    IO_printf("%s: %d\n","Minusculas maiores que 'c e menores que 'p'", contador);
+    IO_pause("Apertar ENTER para continuar.");
+
 }
 
 /*I ncluir um método (0413) para:
@@ -82,8 +113,33 @@ void exe0412 ()
 - mostrar a quantidade de letras minúsculas maiores que 'c' e menores que 'p',
 - definir e usar uma função para receber uma cadeia de caracteres como parâmetro
 e contar a quantidade desejada*/
+int minuscula3 (chars palavras)
+{
+    int posicao=0;
+    int tamanho=0;
+    int contador = 0;
+    char simbolo= '_';
+    tamanho= strlen(palavras);
+    
+    for(posicao=0;posicao < tamanho; posicao= posicao+1)
+    {
+        simbolo= palavras [posicao]; 
+         if  (simbolo > 'c' && simbolo < 'p') 
+        {
+            contador= contador +1;
+        }
+    }
+    return  (contador);
+}
+
 void exe0413 ()
 {
+    chars palavra = IO_new_chars(STR_SIZE);
+
+    IO_id("Exercicio0413 -ED04 - Izadora Galarza Alves");
+    palavra = IO_readstring("Entre com uma palavra:");
+    IO_printf("%s: %d\n","Minusculas maiores que 'c e menores que 'p' :", minuscula3(palavra) );
+    IO_pause("Apertar ENTER para continuar.");
     
 }
 
@@ -93,8 +149,34 @@ void exe0413 ()
 - mostrar as letras minúsculas maiores que 'c' e menores que 'p',
 - definir e usar uma função para receber uma cadeia de caracteres como parâmetro
 e separar em outra cadeia de caracteres os símbolos desejados*/
+int minuscula4 (chars palavras)
+{
+    int posicao=0;
+    int tamanho=0;
+    int contador = 0;
+    char simbolo= '_';
+    tamanho= strlen(palavras);
+    
+    for(posicao=0;posicao < tamanho; posicao= posicao+1)
+    {
+        simbolo= palavras [posicao]; 
+         if  (simbolo > 'c' && simbolo < 'p') 
+        {
+            IO_printf("%c\n",simbolo);
+            contador= contador +1;
+        }
+    }
+    return  (contador);
+}
+
 void exe0414 ()
 {
+    chars palavra = IO_new_chars(STR_SIZE);
+
+    IO_id("Exercicio0414 -ED04 - Izadora Galarza Alves");
+    palavra = IO_readstring("Entre com uma palavra:");
+    IO_printf("%s: %d\n","Minusculas maiores que 'c' e menores que 'p'", minuscula4(palavra));
+    IO_pause("Apertar ENTER para continuar.");
     
 }
 
@@ -104,8 +186,33 @@ void exe0414 ()
 - mostrar a quantidade de letras (tanto maiúsculas, quanto minúsculas)
 maiores que 'c' ou 'C' e menores que 'P' ou 'p'
 contadas por uma função definida para receber uma cadeia de caracteres como parâmetro */
+int intervalocp (chars palavras)
+{
+    int posicao=0;
+    int tamanho=0;
+    int contador = 0;
+    char simbolo= '_';
+    tamanho= strlen(palavras);
+    
+    for(posicao=0;posicao < tamanho; posicao= posicao+1)
+    {
+        simbolo= palavras [posicao]; 
+         if  ((simbolo > 'c' && simbolo < 'p') || (simbolo > 'C' && simbolo < 'P') ) 
+        {
+            contador= contador +1;
+        }
+    }
+    return  (contador);
+}
+
 void exe0415 ()
 {
+    chars palavra = IO_new_chars(STR_SIZE);
+
+    IO_id("Exercicio0415 -ED04 - Izadora Galarza Alves");
+    palavra = IO_readstring("Entre com uma palavra:");
+    IO_printf("%s: %d\n","Letras maiores que 'c'/'C' e menores que 'p'/'P': ", intervalocp(palavra));
+    IO_pause("Apertar ENTER para continuar.");
     
 }
 
@@ -115,10 +222,38 @@ void exe0415 ()
 - mostrar as letras (tanto maiúsculas, quanto minúsculas)
 maiores que 'c' ou 'C' e menores que 'P' ou 'p'
 separadas por uma função definida para receber uma cadeia de caracteres como parâmetro */
+int intervalocp2 (chars palavras)
+{
+    int posicao=0;
+    int tamanho=0;
+    int contador = 0;
+    char simbolo= '_';
+    tamanho= strlen(palavras);
+    
+    for(posicao=0;posicao < tamanho; posicao= posicao+1)
+    {
+        simbolo= palavras [posicao]; 
+         if  ((simbolo > 'c' && simbolo < 'p') || (simbolo > 'C' && simbolo < 'P') ) 
+        {
+            IO_printf("%c\n",simbolo);
+            contador= contador +1;
+        }
+    }
+    return  (contador);
+}
+
 void exe0416 ()
 {
+    chars palavra = IO_new_chars(STR_SIZE);
+
+    IO_id("Exercicio0416 -ED04 - Izadora Galarza Alves");
+    palavra = IO_readstring("Entre com uma palavra:");
+    IO_printf("%s\n","Letras maiores que 'c'/'C' e menores  que 'p'/'P': ");
+    intervalocp2(palavra);
+    IO_pause("Apertar ENTER para continuar.");
     
 }
+
 
 /* Incluir um método (0417) para:
 - ler uma sequência de caracteres do teclado;
