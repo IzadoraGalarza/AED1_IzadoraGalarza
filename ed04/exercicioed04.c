@@ -235,7 +235,7 @@ int intervalocp2 (chars palavras)
         simbolo= palavras [posicao]; 
          if  ((simbolo > 'c' && simbolo < 'p') || (simbolo > 'C' && simbolo < 'P') ) 
         {
-            IO_printf("%c\n",simbolo);
+            IO_printf("%c",simbolo);
             contador= contador +1;
         }
     }
@@ -260,8 +260,40 @@ void exe0416 ()
 - mostrar a quantidade de dígitos pares em uma cadeia de caracteres contados por uma função
 definida para receber uma cadeia de caracteres como parâmetro.
 DICA: Considerar o valor inteiro do código equivalente (type casting) para teste.*/
+
+int pares (chars x) 
+{
+    int posicao=0;
+    char simbolo='_';
+    int contador=0;
+    int tamanho=0;
+
+    tamanho= strlen(x);
+    for(posicao=0; posicao < tamanho; posicao=posicao+1)
+    {
+    simbolo = x[posicao];
+    if(('0'<= simbolo && simbolo <='9') && simbolo%2==0)
+    {
+        IO_printf("[%c]\n", simbolo);
+        contador= contador+1;
+    }
+    
+    }
+    IO_printf("O total de digitos pares e' = %d",contador);
+    int result=contador;
+    return(contador);
+
+
+}
 void exe0417 ()
 {
+    chars palavra = IO_new_chars(STR_SIZE);
+    IO_id("Exercicio0417 - ed04 -Izadora Galarza Alves");
+    palavra = IO_readstring("Entre com uma palavra:");
+    (int)pares(palavra);
+    IO_pause("Apertar ENTER para continuar.");
+
+
     
 }
 
@@ -270,8 +302,35 @@ void exe0417 ()
 - mostrar todos os símbolos não alfanuméricos (letras e dígitos) em uma cadeia de caracteres
 separados por meio de uma função.
 DICA: Usar negação*/
+bool AlfaN ( char x)
+{
+    bool result = false;
+    if ( ('a' <= x && x <='z') || ('A' <= x && x <='Z')  || ( '0'<=x && x<='9') )
+    {
+        result= true;
+    }
+    return(result);
+}
 void exe0418 ()
 {
+    chars palavra = IO_new_chars(STR_SIZE);
+    int tamanho=0;
+    int simbolo='_';
+    int posicao=0;
+
+    IO_id("Exemplo0418 -ed04 - Izadora Galarza Alves");
+    palavra = IO_readstring("Entre com uma palavra: ");
+    tamanho = strlen(palavra);
+    for (posicao=0; posicao < tamanho; posicao= posicao+1)
+    {
+        simbolo=palavra[posicao];
+        if(!(AlfaN(simbolo)))
+        {
+            IO_printf("[%c]\n",simbolo);
+        }
+        
+    }
+    IO_pause("Apertar ENTER para continuar.");
     
 }
 
@@ -281,8 +340,44 @@ void exe0418 ()
 separados por meio de uma função.
 DICA: Usar conjunção de duas outras funções.*/
 
+bool letra (char x)
+{
+    bool result=false;
+    if (('A'<= x && x<='Z') || ('a' <= x &&  x <= 'z') )
+    {
+        result=true;
+    }  
+    return(result);
+}
+
+bool numero (char x)
+{
+    bool result=false;
+    if ('0'<= x && x<='9')
+    {
+        result=true;
+    }  
+    return(result);
+}
 void exe0419 ()
 {
+    chars palavra = IO_new_chars(STR_SIZE);
+    int tamanho=0;
+    int simbolo='_';
+    int posicao=0;
+
+    IO_id("Exemplo0419 -ed04 - Izadora Galarza Alves");
+    palavra = IO_readstring("Entre com uma palavra: ");
+    tamanho = strlen(palavra);
+    for (posicao=0; posicao < tamanho; posicao= posicao+1)
+    {
+        simbolo=palavra[posicao];
+        if(!(letra(simbolo)) && !(numero(simbolo)))
+        {
+            IO_printf("[%c]\n",simbolo);
+        }
+    }
+    IO_pause("Apertar ENTER para continuar.");
     
 }
 
@@ -291,12 +386,111 @@ void exe0419 ()
 - mostrar e contar a quantidade de símbolos alfanuméricos (letras e dígitos) em cada palavra,
 por meio de uma função, e calcular o total acumulado de todas as palavras*/
 
+bool AlfaNumerico ( char x)
+{
+    bool result = false;
+    if ( ('a' <= x && x <='z') || ('A' <= x && x <='Z')  || ( '0'<=x && x<='9') )
+    {
+        result= true;
+    }
+    return(result);
+}
+
 void exe0420 ()
 {
+    chars palavra = IO_new_chars(STR_SIZE);
+    int tamanho=0;
+    int simbolo='_';
+    int posicao=0;
+    int contador=0;
+
+    IO_id("Exemplo0420 -ed04 - Izadora Galarza Alves");
+    palavra = IO_readln("Entre com uma palavra: ");
+    tamanho = strlen(palavra);
+    for (posicao=0; posicao < tamanho; posicao= posicao+1)
+    {
+        simbolo=palavra[posicao];
+        if(AlfaNumerico(simbolo))
+        {
+            IO_printf("%d :[%c]\n",contador,simbolo);
+            contador=contador+1;
+            
+        }
+        
+    }
+    IO_printf("Total de numeros e letras: %d", contador);
+    IO_pause("Apertar ENTER para continuar.");
     
 }
 
+/** 
+ * Incluir um método (04E1) para:
+- ler certa quantidade de cadeias de caracteres do teclado;
+- contar a quantidade de símbolos alfanuméricos, incluindo espaços em branco, em cada palavra,
+e calcular o total de todas as palavras com mais de três símbolos, por meio de uma função.
+OBS.: Para a leitura incluir espaços em branco, usar
+IO_readln( ) ou fgets( ).
+ */
+void exe04E1 ()
+{
 
+}
+
+/** Incluir um método (04E2) para:
+- ler duas cadeias de caracteres do teclado;
+- calcular qual das duas sequências possui a maior quantidade de dígitos,
+por meio de uma função.*/
+
+int digito (chars x)
+{
+    int posicao=0;
+    char simbolo='_';
+    int contador=0;
+    int tamanho=0;
+
+    tamanho= strlen(x);
+    for(posicao=0; posicao < tamanho; posicao=posicao+1)
+    {
+    simbolo= x[posicao];
+    if(('0'<= simbolo && simbolo <='9') && !('a'<= simbolo && simbolo <='z' ||'A'<= simbolo && simbolo <='Z'  ))
+    {
+        contador= contador+1;
+    }
+    }
+    return(contador);
+    
+}
+void exe04E2 ()
+{
+    chars palavra1 = IO_new_chars(STR_SIZE);
+    chars palavra2 = IO_new_chars(STR_SIZE);
+    int contador1=0;
+    int contador2=0;
+
+    palavra1=IO_readln("Entre com uma palavra:");
+    palavra2= IO_readln("Entre com uma segunda palavra: ");
+    contador1=digito(palavra1);
+    contador2=digito(palavra2);
+
+    if(contador1>contador2)
+    {
+        IO_printf("Primeira palavra tem mais digitos que a segunda [%d]>[%d]",contador1,contador2);
+    }
+    else if (contador2>contador1)
+    {
+        IO_printf("Segunda palavra tem mais digitos que a primeira [%d]>[%d]",contador2,contador1);
+
+    }
+    else
+    {
+        IO_printf("Primeira palavra e segunda possuem a mesma quantidade de digitos [%d]=[%d]",contador1,contador2);
+
+    }
+
+    IO_pause("Apertar ENTER para continuar.");
+
+
+}
 
 int main ()
 {
@@ -318,9 +512,14 @@ int main ()
         IO_println("8 - Exercicio 0418");
         IO_println("9 - Exercicio 0419");
         IO_println("10 - Exercicio 0420");
+        IO_println("11 - Exercicio 04E1");
+        IO_println("12 - Exercicio 04E2");
+
+
 
 
         op = IO_readint("Escolha um exemplo: ");
+        
 
         //testar valor 
         switch(op)
@@ -336,6 +535,8 @@ int main ()
             case 8 : exe0418();break;
             case 9 : exe0419(); break;
             case 10 : exe0420(); break;
+            case 11 : exe04E1(); break;
+            case 12 : exe04E2(); break;
             default:
                 IO_pause ( IO_concat ( "Valor diferente das opcoes (",
                 IO_concat ( IO_toString_d ( op ), ")" ) ) );
