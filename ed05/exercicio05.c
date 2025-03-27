@@ -48,15 +48,18 @@ Exemplo:  n = 5 => { 15, 30, 45, 60, 75 }
  */
 void multiplosTresCinco (int n )
 {
-    int y =0;
+    int i =0;
+    int x=0;
     int multiplo =0;
-    for (y =1; y <= n; y= y+1)
+    while(i<n)
     {
-        multiplo= y*15; //usando o mmc
+        multiplo = x * 3;
         if( multiplo%5==0 && multiplo%3==0)
         {
-            IO_printf("%d: [%d]\n", y, multiplo);
+            IO_printf("%d: [%d]\n", i, multiplo);
+            i=i+1;
         }
+        x=x+1;
        
     }
 }
@@ -291,27 +294,80 @@ e mostrar os resultados em outro método.
 Exemplo:  n = 5 => 1/13 + 1/9 + 1/6 + 1/4 + 1/3
  */
 
+ void inversoNaturais (int n, int y, double denominador, double soma, int contador)
+{
  
-
-void exe0520 (void)
+ if(contador < n)
+{
+    denominador=denominador+(double)y;
+    soma= soma + (1/denominador);
+    inversoNaturais( n,y+1,denominador, soma,  contador +1);
+    IO_printf("1/%.4lf\n",denominador);
+ 
+}
+ else
+{
+    IO_printf("soma dos inversos = %f\n", soma);
+}
+ 
+}
+  
+  
+ 
+ void exe0520 (void)
 {
     int n=0;
-    IO_id("Exercicio0520 - ED05 - Izadoraa Galarza Alves");
-    n = IO_readint("Entre com uma quantidade: ");
-    imprimir(n);
-    IO_pause("Apertar ENTER para continuar");
+     IO_id("Exercicio0520 - ED05 - Izadoraa Galarza Alves");
+     n = IO_readint("Entre com uma quantidade: ");
+     inversoNaturais(n,0,3.0,0.0,0);
+     
+ 
+     IO_pause("Apertar ENTER para continuar");
 }
 
+
+/**
+ * Incluir função e método (Exemplo05E1) para  
+ler um número inteiro do teclado (n) e,  
+mediante o uso da função, calcular e mostrar o fatorial desse valor em outro método: 
+ 
+n! = n * (n-1) * (n-2) * ... * 3 * 2 * 1  se n>0
+ 
+ */
+
+ int fatorial (int n)
+ {
+
+  int y=1;
+  for(int x= n; x >0; x=x-1)
+  {
+    y= y*x;
+    if(x>1)
+    {
+        IO_printf("%d*",x );
+    }
+    else if(x==1)
+    {
+        IO_printf("%d",x );
+    }
+    
+  }
+  return(y);
+ }
 void exe05E1 (void)
 {  
+    int n=0;
+    IO_id("Exercicio05E1 - ED05 - Izadoraa Galarza Alves");
+    n = IO_readint("Entre com uma quantidade: ");
+    IO_printf("\nFatorial de %d = %d",n,fatorial(n));
+    
+
+    IO_pause("Apertar ENTER para continuar");
 
     
 }
 
-void exe05E2 (void)
-{
-    
-}
+
 
 
 int main ()
@@ -335,7 +391,6 @@ int main ()
         IO_println("9 - Exercicio 0519");
         IO_println("10 - Exercicio 0520");
         IO_println("11 - Exercicio 05E1");
-        IO_println("12 - Exercicio 05E2");
 
 
 
@@ -358,7 +413,6 @@ int main ()
             case 9 : exe0519(); break;
             case 10 : exe0520(); break;
             case 11 : exe05E1(); break;
-            case 12 : exe05E2(); break;
             default:
                 IO_pause ( IO_concat ( "Valor diferente das opcoes (",
                 IO_concat ( IO_toString_d ( op ), ")" ) ) );
