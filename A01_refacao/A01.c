@@ -111,52 +111,132 @@ void question_05 ()
 
 //Resposta correta: c) (I)x=x+1;  (II)(x <=0)  (III)x=x+1;
 
-bool is_Multiple_of_7 (int valor)
-{
-    int result = valor;
-    int resto=0, ultimo=0;
-    while(result > 0)
-    {
-        resto =result/10; //o que sobrou apos tirar o ultimo algarismo
-        ultimo =result % 10; //ultimo algarismo
-        result = resto - 2*ultimo;
+#include <stdio.h>
+#include <stdbool.h>
 
+bool is_Multiple_of_7(int valor) {
+    
+    if (valor == -14 || valor == -7 || valor == 0) {
+        return true;
+    } 
+    else if (valor > 0) {
+        return is_Multiple_of_7((valor / 10) - (valor % 10 * 2));
     }
-   
-    return (result);
+    
+    return false;
 }
-void question_06 ()
+
+void question_06() 
 {
     int valor=0;
-    int x = 0;
-    IO_id("Questao 6 - aberta");
-    valor = IO_readint ("Entre com um valor: ");
-    x = is_Multiple_of_7(valor);
-    if(x == 0 || x == -7 || x == -14)
-    {
-        IO_printf(" Valor %d e' multiplo de 7",valor);
+    
+    printf("Questao 6 - aberta\n");
+    printf("Entre com um valor: ");
+    scanf("%d", &valor);
+    
+    if (is_Multiple_of_7(valor)) { 
+        printf("Valor %d e' multiplo de 7.\n", valor);
+    } else { 
+        printf("Valor %d nao e' multiplo de 7.\n", valor);
     }
-    else
-    {
-        IO_printf(" Valor %d nao e' multiplo de 7",valor);
-
-    }
-
-    IO_pause("Apertar ENTER para continuar.");
-
 }
+
+double sum (int n)
+{
+    double result = 0.0;
+    double ante= 0.0;
+    double diff =0.0;
+    int x=0;
+
+    for(x=1; x<=n+1; x=x+1)
+    {
+        ante = result;
+        if(x%2 == 0)
+        {
+            result = result - (1.0/x) ;
+        }
+        else
+        {
+            result = result + (1.0/x) ;
+
+        }
+
+        diff = ante - result;
+        if (diff < 0)
+        {
+        diff = -diff;
+        }
+        
+
+       printf("O termo %d = %.4lf e a diferenca entre ele e o proximo %.4lf \n", x, result,diff);
+    }
+
+    return result;
+}
+
+
 
 
 void question_07 ()
 {
+    int n=0;
+    double x=0;
+    double soma=0.0;
+    IO_printf("Questao 7 - aberta\n");
+    n = IO_readint("Entre com uma quantidade:");
+    x= sum(n);
+    soma = x;
+    printf("Soma total com %d termos: %.6lf\n", n, soma);
 
+}
 
+bool parequema (chars palavra1, chars palavra2)
+{
+    int t1 = strlen(palavra1);
+    int t2 = strlen(palavra2);
+    bool result= false;
+    int x = t1;
+    int y=0;
+    
+        if(t1 >= 1 && t2 >= 1)
+        {
+            if (palavra1[t1 - 1] == palavra2[0])
+            {
+            IO_printf("%c e %c são ....", palavra1, palavra2);
+            result= true;
+            }
+        }
+
+        if (t1 >= 2 && t2 >= 2)
+        {
+        if (palavra1[t1 - 2] == palavra2[0] &&
+            palavra1[t1 - 1] == palavra2[1])
+        {
+            IO_printf("2 letras repetem: %c%c\n", palavra1[t1 - 2], palavra1[t1 - 1]);
+            result = true;
+        }
+        }
+    
+    return result;
 }
 
 void question_08 ()
 {
+    chars palavra1 = IO_new_chars(STR_SIZE);
 
+    palavra1 = IO_readln("Entre com a primeira palavra: ");
+    IO_printf("\n");
+    chars palavra2 = IO_new_chars(STR_SIZE);
+    palavra2 = IO_readln("Entre com a segunda palavra: ");
 
+    if (parequema(palavra1, palavra2))
+    {
+        IO_printf("\nSao parequema (silabas iguais)\n");
+    }
+    else
+    {
+        IO_printf("\nNao sao parequema\n");
+    }
 }
 
 
@@ -165,6 +245,8 @@ int main ()
     int op=0;
 
 
+    do
+    {
     printf("0 - Terminar\n");
     printf("1 - question_01\n");
     printf("2 - question_02\n");
@@ -177,7 +259,7 @@ int main ()
    
 
     printf("%s\n","Qual a opcao?");
-    scanf("%d", &op);
+    scanf("%d", &op); getchar();
 
     switch (op)
     {
@@ -200,4 +282,5 @@ int main ()
     default:
         break;
     }
+}while(op != 0);
  }
