@@ -1,0 +1,1 @@
+Theldo, pelo oq eu li era pra ter compatibilidade com C, mas eu nao lembrava bem se o printf era compativel com c++, então fiz metade com printf e metade com cout.
